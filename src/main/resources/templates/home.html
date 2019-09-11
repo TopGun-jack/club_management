@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.4.1/dist/jquery.js}"></script>
+</head>
+<body>
+<div th:replace="commons/nav::topnav(activeUri='main.html')"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div th:replace="commons/nav::leftnav(activeUri='main.html')"></div>
+        </div>
+        <div class="col-md-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title" ></h3>
+                </div>
+                <div class="panel-body">
+                    俱乐部管理系统
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

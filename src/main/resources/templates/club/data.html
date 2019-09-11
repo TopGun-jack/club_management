@@ -1,0 +1,49 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+
+
+<table class="table table-striped">
+
+    <caption>
+        <a class="btn btn-lg btn-success" th:href="@{/club}">添加学生</a>
+    </caption>
+    <thead>
+    <tr>
+        <th>编号</th>
+        <th>俱乐部名称</th>
+        <th>俱乐部负责人</th>
+        <th>俱乐部类型</th>
+        <th>创建时间</th>
+        <th>活动次数</th>
+        <th>会员数量</th>
+        <th>操作</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="club,status:${clubs}">
+        <td th:text="${status.count}">Uma</td>
+        <td th:text="${club.name}">Pune</td>
+        <td th:text="${club.principal}">411027</td>
+        <td th:text="${club.clubType.ordinal()==0?'足球':(club.clubType.ordinal()==1?'羽毛球':(club.clubType.ordinal()==2?'篮球':(club.clubType.ordinal()==3?'乒乓球':'')))}">411027</td>
+        <td th:text="${#dates.format(club.createTime,'yyyy-MM-dd')}">411027</td>
+        <td th:text="${club.activities}">411027</td>
+        <td th:text="${club.members}">411027</td>
+
+        <td>
+            <a th:href="@{/club/} + ${club.id}" class="btn btn-sm btn-primary">修改</a>
+            <!--非异步删除-->
+            <!--<button th:attr="delete_uri=@{/club/}+${club.id}" class="btn btn-sm btn-danger delete_btn">删除</button>-->
+            <!--异步删除-->
+            <a th:onclick="|delete_btn(${club.id})|" th:if="${club.members=='0'}" class="btn btn-sm btn-danger ">删除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="col-sm-4">
+
+</div>
+
+<div class="col-sm-4">
+
+</div>
+</html>
