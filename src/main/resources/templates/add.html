@@ -101,7 +101,7 @@
                 $('#members').val('');
             }
         });
-        $('#clubName').blur(function () {
+        $('#clubName').change(function () {
             if ($('#clubName').val() != null){
                 $.get("getClubName?name=" +$('#clubName').val(),function (data) {
                     if (data == '1'){
