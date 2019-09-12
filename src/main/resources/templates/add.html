@@ -103,7 +103,7 @@
         });
         $('#clubName').change(function () {
             if ($('#clubName').val() != null){
-                $.get("getClubName?name=" +$('#clubName').val(),function (data) {
+                $.get("/crm/getClubName?name=" +$('#clubName').val(),function (data) {
                     if (data == '1'){
                         alert("该俱乐部已存在");
                         $('#clubName').val('');
