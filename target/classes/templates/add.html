@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.4.1/dist/jquery.js}"></script>
+</head>
+<body>
+    <!--顶部导航栏-->
+    <div th:replace="commons/nav::topnav"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <!--左侧导航-->
+            <div class="col-md-2">
+                <div th:replace="commons/nav::leftnav(activeUri='clubs.html')"></div>
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-4">
+
+                <form th:action="@{/club}" th:method="post" class="form-horizontal" role="form">
+                    <input type="hidden" name="_method" value="put" th:if="${club!=null}"/>
+                    <input type="hidden" name="id" th:value="${club.id}" th:if="${club!=null}"/>
+                    <div class="form-group">
+                        <label for="clubName" class="col-sm-3 control-label">俱乐部名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="name" required class="form-control" id="clubName"
+                               th:value="${club!=null}?${club.name}"  placeholder="请输入俱乐部名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="principal" class="col-sm-3 control-label">负责人</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="principal" required class="form-control" id="principal"
+                                   th:value="${club!=null}?${club.principal}"  placeholder="请输入负责人">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="createTime"  class="col-sm-3 control-label">创建时间</label>
+                        <div class="col-sm-9">
+                            <input type="date" name="createTime" required th:readonly="${club!=null}?'true'"  class="form-control" id="createTime"
+                                   th:value="${club!=null}?${#dates.format(club.createTime,'yyyy-MM-dd')}"  placeholder="请输入创建时间">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="clubType"  class="col-sm-3 control-label">俱乐部类型</label>
+                        <div class="col-sm-9" id="clubType">
+                            <select name="clubType"    class="form-control">
+                                <option value ="FOOTBALL"  th:disabled="${club !=null && club.clubType.toString()!='FOOTBALL'}?'true'" th:selected="${club!=null}?(${club.clubType.toString()=='FOOTBALL'}?'true')">足球</option>
+                                <option value ="BADMINTON" th:disabled="${club !=null && club.clubType.toString()!='BADMINTON'}?'true'" th:selected="${club!=null}?(${club.clubType.toString()=='BADMINTON'}?'true')">羽毛球</option>
+                                <option value="BASKETBALL" th:disabled="${club !=null && club.clubType.toString()!='BASKETBALL'}?'true'" th:selected="${club!=null}?(${club.clubType.toString()=='BASKETBALL'}?'true')">篮球</option>
+                                <option value="PINGPONG"  th:disabled="${club !=null && club.clubType.toString()!='PINGPONG'}?'true'" th:selected="${club!=null}?(${club.clubType.toString()=='PINGPONG'}?'true')">乒乓球</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="activities"  class="col-sm-3 control-label">活动次数</label>
+                        <div class="col-sm-9">
+                            <input type="text" th:readonly="${club!=null}?'true'" name="activities" required  class="form-control" id="activities"
+                                   th:value="${club!=null}?${club.activities}"  placeholder="请输入活动次数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="members"  class="col-sm-3 control-label">会员数量</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="members" required  class="form-control" id="members"
+                                   th:value="${club!=null}?${club.members}"  placeholder="请输入会员数量">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname"  class="col-sm-3 control-label">备注</label>
+                        <div class="col-sm-9">
+                            <textarea name="remarks" th:text="${club!=null}?${club.remarks}" class="form-control" rows="3" id="lastname"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-10">
+                            <button type="submit" class="btn btn-default" th:text="${club!=null}?'修改':'添加'">添加</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<script>
+    $(function () {
+        $('#activities').blur(function () {
+            if($('#activities').val()<0){
+                alert('会员数量不能为零!');
+                $('#activities').val('');
+            }
+        });
+        $('#members').blur(function () {
+            if($('#members').val()<0){
+                alert('会员数量不能为零!');
+                $('#members').val('');
+            }
+        });
+        $('#clubName').change(function () {
+            if ($('#clubName').val() != null){
+                $.get("/crm/getClubName?name=" +$('#clubName').val(),function (data) {
+                    if (data == '1'){
+                        alert("该俱乐部已存在");
+                        $('#clubName').val('');
+                    }
+                } )
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

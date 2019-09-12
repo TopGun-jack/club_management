@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav class="navbar navbar-default" role="navigation" th:fragment="topnav">
+    <div class="container-fluid">
+        <div class="col-md-4">
+            <form th:method="get"  class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" id="search_input" name="name" th:value="${name}" class="form-control" placeholder="Search">
+                </div>
+                <button type="button" id="search_btn" class="btn btn-default">提交</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+        <div class="col-md-2" style="margin: auto">
+            <form  class="navbar-form navbar-right" role="search">
+                <a href="#"  class="btn btn-info btn-md">
+                    <span class="glyphicon glyphicon-log-in"></span> 退出
+                </a>
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+
+<ul class="nav nav-pills nav-stacked" th:fragment="leftnav">
+    <li class="active" th:class="${activeUri=='main.html' ? 'active' : '' }"><a href="#"
+                                                                                th:href="@{/main.html}">Home</a></li>
+    <li th:class="${activeUri=='clubs.html' ? 'active' : '' }"><a href="#" th:href="@{/clubs}">俱乐部信息</a></li>
+    <li><a href="#">待办事项</a></li>
+    <li><a href="#">俱乐部活动</a></li>
+    <li><a href="#">俱乐部公告</a></li>
+    <li><a href="#">俱乐部知识</a></li>
+</ul>
+</body>
+</html>
