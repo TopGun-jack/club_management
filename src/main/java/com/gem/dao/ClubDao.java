@@ -9,4 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface ClubDao extends JpaRepository<Club,Long> {
+
+    Club findClubByName(String name);
 }

@@ -50,4 +50,7 @@ public class ClubService {
     clubDao.deleteById(id);
   }
 
+  public Club findByName(String name){
+    return clubDao.findClubByName(name);
+  }
 }
