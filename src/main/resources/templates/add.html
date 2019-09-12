@@ -25,9 +25,9 @@
                     <input type="hidden" name="_method" value="put" th:if="${club!=null}"/>
                     <input type="hidden" name="id" th:value="${club.id}" th:if="${club!=null}"/>
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-3 control-label">俱乐部名称</label>
+                        <label for="clubName" class="col-sm-3 control-label">俱乐部名称</label>
                         <div class="col-sm-9">
-                            <input type="text" name="name" required class="form-control" id="firstname"
+                            <input type="text" name="name" required class="form-control" id="clubName"
                                th:value="${club!=null}?${club.name}"  placeholder="请输入俱乐部名称">
                         </div>
                     </div>
@@ -100,7 +100,18 @@
                 alert('会员数量不能为零!');
                 $('#members').val('');
             }
-        })
+        });
+        $('#clubName').blur(function () {
+            if ($('#clubName').val() != null){
+                $.get("getClubName?name=" +$('#clubName').val(),function (data) {
+                    if (data == '1'){
+                        alert("该俱乐部已存在");
+                        $('#clubName').val('');
+                    }
+                } )
+            }
+        });
+
     });
 </script>
 </body>
