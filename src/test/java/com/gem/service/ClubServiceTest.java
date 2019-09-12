@@ -29,4 +29,10 @@ public class ClubServiceTest {
     @Test
     public void out() {
     }
+
+    @Test
+    public void findByName() {
+
+        System.out.println(clubService.findByName("新点羽毛球俱乐部"));
+    }
 }
