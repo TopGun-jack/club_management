@@ -1,5 +1,5 @@
 # club_management
-俱乐部管理系统
+俱乐部管理系统(张家港某公司笔试题)
 
 1. 使用springboot与jpa在maven构建项目,数据库使用mysql数据库，开发软件使用的是idea
 2. 在使用时按需修改yml配置文件中数据库连接参数
